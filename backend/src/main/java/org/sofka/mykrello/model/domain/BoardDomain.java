@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -44,11 +42,12 @@ public class BoardDomain implements Serializable {
 
     @Column(name = "brd_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
-
+    
     @Column(name = "brd_updated_at")
     private Instant updatedAt;
 
     @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "board")
+
     @JsonManagedReference(value = "columnsForBoard")
     private List<ColumnForBoardDomain> columnsForBoard = new ArrayList<>();
 

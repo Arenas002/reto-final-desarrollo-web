@@ -30,9 +30,15 @@ public class LogDomain implements Serializable {
     @Column(name = "log_id", nullable = false, updatable = false)
     private Integer id;
 
+
+
+    //se creo
+@Column(name = "tsk_id_task", insertable = false,updatable = false)
+private  Integer taskId;
+
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = TaskDomain.class, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "tsk_id_task", nullable = false, updatable = false)
-    @JsonBackReference(value = "task")
+    @JsonBackReference(value = "log_task")
     private TaskDomain task;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.ALL)
@@ -48,6 +54,14 @@ public class LogDomain implements Serializable {
     @Column(name = "log_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
+public LogDomain(Integer taskId,ColumnDomain previous, ColumnDomain current){
+    this.taskId = taskId;
+    this.previous = previous;
+    this.current = current;
+}
 
+public LogDomain(){
+
+}
 
 }
