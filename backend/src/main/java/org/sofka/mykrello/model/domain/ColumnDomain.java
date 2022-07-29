@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -38,20 +40,12 @@ public class ColumnDomain implements Serializable {
     @Column(name = "clm_updated_at")
     private Instant updatedAt;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class, cascade = CascadeType.ALL, mappedBy = "previous")
-    @JsonManagedReference(value = "logPrevious")
-    private List<LogDomain> logPrevious = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class, cascade = CascadeType.ALL, mappedBy = "current")
-    @JsonManagedReference(value = "logCurrent")
-    private List<LogDomain> logCurrent = new ArrayList<>();
-
     @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "column")
-    @JsonManagedReference(value = "columnForBoards")
+    @JsonBackReference(value = "column_For_Boards")
     private List<ColumnForBoardDomain> columnForBoards = new ArrayList<>();
 
-
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = TaskDomain.class, cascade = CascadeType.ALL, mappedBy = "column")
-    @JsonManagedReference(value = "columns")
-    private List<TaskDomain> taskDomainList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = TaskDomain.class , mappedBy = "domain")
+    @JsonManagedReference(value = "colunmDomain")
+    private List<TaskDomain> taskDomainList= new ArrayList<>();
 }
+

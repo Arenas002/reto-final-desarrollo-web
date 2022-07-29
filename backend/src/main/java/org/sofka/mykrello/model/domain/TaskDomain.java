@@ -34,17 +34,6 @@ public class TaskDomain implements Serializable {
     private Integer id;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "clm_id_column", insertable = false, updatable = false)
-    @JsonBackReference(value ="columns")
-    private ColumnDomain column ;
-
-
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = BoardDomain.class, optional = false, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "brd_id_board", nullable = false)
-    @JsonBackReference(value = "board")
-    private BoardDomain board;
-
     @Column(name = "tsk_name", nullable = false, length = 100)
     private String name;
 
@@ -52,10 +41,10 @@ public class TaskDomain implements Serializable {
     private String description;
 
     @Column(name = "clm_id_column")
-    private Integer columnTask;
+    private Integer column;
 
-//    @Column(name = "clm_id_board")
-//    private Integer boardTask;
+    @Column(name = "brd_id_board")
+    private Integer board;
 
 
     @Column(name = "tsk_delivery_date")
@@ -68,7 +57,12 @@ public class TaskDomain implements Serializable {
     @Column(name = "tsk_updated_at")
     private Instant updateAt;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class , cascade = CascadeType.ALL, mappedBy = "task")
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = LogDomain.class , mappedBy = "task")
     @JsonManagedReference(value = "log_task")
-    private List<LogDomain> taskDomainList = new ArrayList<>();
+    private List<LogDomain>  log= new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "clm_id_column", insertable = false, updatable = false)
+    @JsonBackReference(value ="colunmDomain")
+    private ColumnDomain domain;
 }

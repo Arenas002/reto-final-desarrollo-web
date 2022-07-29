@@ -22,7 +22,8 @@ public class TaskService implements TaskServiceInterface {
     private LogService logService;
 
     @Autowired
-    private TaskRepository taskRepository;
+    private TaskRepository
+            taskRepository;
 
     @Autowired
     private ColumnRepository columnRepository;
@@ -48,13 +49,13 @@ public class TaskService implements TaskServiceInterface {
 
     @Override
     public TaskDomain update(Integer id, TaskDomain task) {
-        // TODO Auto-generated method stub
-        return null;
+        task.setId(id);
+        return taskRepository.save(task);
     }
 
     @Override
     public TaskDomain delete(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+       taskRepository.deleteById(id);
+       return null;
     }
 }

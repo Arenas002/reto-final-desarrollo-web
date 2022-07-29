@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 
 @Data
 @Entity
@@ -36,25 +37,25 @@ public class LogDomain implements Serializable {
 @Column(name = "tsk_id_task", insertable = false,updatable = false)
 private  Integer taskId;
 
+    @Column(name = "clm_id_previous")
+    private Integer previous;
+
+    @Column(name = "clm_id_current")
+    private Integer current;
+
+    // se agrego el trasnsient
+    @Transient
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = TaskDomain.class, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "tsk_id_task", nullable = false, updatable = false)
     @JsonBackReference(value = "log_task")
     private TaskDomain task;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "clm_id_previous", nullable = false, updatable = false)
-    @JsonBackReference(value = "logPrevious")
-    private ColumnDomain previous;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "clm_id_current", nullable = false, updatable = false)
-    @JsonBackReference(value = "logCurrent")
-    private ColumnDomain current;
 
     @Column(name = "log_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
-public LogDomain(Integer taskId,ColumnDomain previous, ColumnDomain current){
+public LogDomain(Integer taskId, Integer previous, Integer current){
     this.taskId = taskId;
     this.previous = previous;
     this.current = current;
