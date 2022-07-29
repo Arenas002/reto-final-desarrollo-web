@@ -1,80 +1,71 @@
 'use strict';
 
-export class UserModel {
-    #privateID;
-    #privateNombre;
-    #privateApellido;
-    #privateCorreo;
-    #privateTelefono;
-    #privateCreado;
+export class BoardModel {
+    #Id;
+    #boardName;
+    #createdAt;
+    #updatedAt;
+    #colunmsForBoard;
+    
 
-    constructor(data) {
-        if (data) {
-            this.#privateID = data.id;
-            this.#privateNombre = data.nombre;
-            this.#privateApellido = data.apellido;
-            this.#privateCorreo = data.correo;
-            this.#privateTelefono = data.telefono;
-            this.#privateCreado = data.created;
-        }
+    constructor(id,name,createdAt,updatedAt,columnsForBoard) {
+        
+            this.#Id = id;
+            this.#boardName = name;
+            this.#createdAt = createdAt;
+            this.#updatedAt = updatedAt;
+            this.#colunmsForBoard = columnsForBoard;
+            
+        
     }
 
     get ID() {
-        return this.#privateID;
+        return this.#Id;
     }
 
     set ID(id) {
-        this.#privateID = id;
+        this.#Id = id;
     }
 
     get Nombre() {
-        return this.#privateNombre;
+        return this.#boardName;
     }
 
-    set Nombre(nombre) {
-        this.#privateNombre = nombre;
+    set Nombre(name) {
+        this.#boardName = name;
     }
 
     get Apellido() {
-        return this.#privateApellido;
+        return this.#createdAt;
     }
 
-    set Apellido(apellido) {
-        this.#privateApellido = apellido;
+    set Apellido(createdAt) {
+        this.#createdAt = createdAt;
     }
 
     get Correo() {
-        return this.#privateCorreo;
+        return this.#updatedAt;
     }
 
-    set Correo(correo) {
-        this.#privateCorreo = correo;
+    set Correo(updatedAt) {
+        this.#updatedAt = updatedAt;
     }
 
     get Telefono() {
-        return this.#privateTelefono;
+        return this.#colunmsForBoard;
     }
 
-    set Telefono(telefono) {
-        this.#privateTelefono = telefono;
-    }
-
-    get Creado() {
-        return this.#privateCreado;
-    }
-
-    set Creado(creado) {
-        this.#privateCreado = creado;
+    set Telefono(colunmForBoard) {
+        this.#colunmsForBoard = colunmForBoard;
     }
 
     getValues() {
         return {
-            id: this.#privateID,
-            nombre: this.#privateNombre,
-            apellido: this.#privateApellido,
-            correo: this.#privateCorreo,
-            telefono: this.#privateTelefono,
-            creado: this.#privateCreado,
+            id: this.#Id,
+            name: this.#boardName,
+            createdAt : this.#createdAt,
+            updatedAt: this.#updatedAt,
+            colunmForBoard: this.#colunmsForBoard,
         };
     }
 }

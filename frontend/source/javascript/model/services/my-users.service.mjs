@@ -1,12 +1,32 @@
 import { Config } from "../../config.mjs";
-import { UserModel } from "../user.model.mjs";
+import { BoardModel} from "../user.model.mjs";
 
 export class MyUsersService {
 
-    constructor() { }
+    #board;
+
+    constructor() {
+        this.#board = [];
+    }
+
+
+    async getBoard(){
+       const resquest = await fetch(`${Config.BackendURL}/board/1`)
+      const{ data } = await resquest.json();
+console.log(data);
+       data.forEach(({id,name,createdAt,updatedAt,columnsForBoard})=>{
+        this.#board.push(new BoardModel(id,name,createdAt,updatedAt,columnsForBoard))
+        console.log(this.#board);
+
+       });
+    
+       return this.#board;
+       
+
+    }
 
     async getUsers() {
-        const data = await fetch(`${Config.BackendURL}/usuario/records`).then(response => response.json());
+        const data = await fetch(`${Config.BackendURL}`).then(response => response.json());
         const users = new Array();
         data.items.forEach(item => {
             const user = new UserModel(item);

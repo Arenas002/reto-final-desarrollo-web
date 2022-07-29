@@ -11,15 +11,22 @@ class IndexController {
     #privateMyUsersService;
 
     constructor() {
-        const headerData = ['nombre', 'apellidos', 'correo', 'teléfono', 'creado', 'acciones'];
-        this.#privateView = new IndexView(headerData);
+        this.#privateView = new IndexView();
         this.#privateMyUsersService = new MyUsersService();
     }
 
-    async init() {
-        this.#privateView.Data = await this.#privateMyUsersService.getUsers();
-        this.#privateView.init();
-    }
+
+
+async init(){
+    const board = await this.#privateMyUsersService.Board
+    this.#privateView.init(board)
+}
+
+
+    // async init() {
+    //     this.#privateView.Data = await this.#privateMyUsersService.getUsers();
+    //     this.#privateView.init();
+    // }
 }
 
 export const index = new IndexController();
