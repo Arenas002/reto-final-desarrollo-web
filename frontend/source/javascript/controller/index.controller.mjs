@@ -1,33 +1,30 @@
-"use strict";
+import{Config} from "../config.mjs"
 
-// Services
-import { MyUsersService } from "../model/services/my-users.service.mjs";
-
-// Views
 import { IndexView } from "../view/index.view.mjs";
 
-class IndexController {
-    #privateView;
-    #privateMyUsersService;
+import{ BoardModel } from "../model/board.model.mjs"
 
-    constructor() {
-        this.#privateView = new IndexView();
-        this.#privateMyUsersService = new MyUsersService();
-    }
+import { BoardService } from "../model/services/board.service.mjs"
 
 
+class IndexController{
+#board;
+#ktrelloURL;
+#view;
 
-async init(){
-    const board = await this.#privateMyUsersService.Board
-    this.#privateView.init(board)
+constructor(){
+    this.#ktrelloURL = Config.ktrello_URL;
+    this.#board = new BoardModel();
+    this.#view = new IndexView();
+}
+
+async init( ){
+    const data = new BoardService(this.#ktrelloURL);
+    this.#view.init(await data.getBoard());
 }
 
 
-    // async init() {
-    //     this.#privateView.Data = await this.#privateMyUsersService.getUsers();
-    //     this.#privateView.init();
-    // }
 }
 
-export const index = new IndexController();
+const index = new IndexController();
 index.init();
