@@ -7,11 +7,11 @@ import { BoardModel } from "../model/board.model.mjs"
 import { BoardService } from "../model/services/board.service.mjs"
 
 /**
- * Esta clase es la encarada de controlar los tableros interactando 
+ * Esta clase es la encarada de controlar los tableros interactuando 
  * con la clase BoardServices
  * @class IndexController
  * @author Cristian David Arenas - Julio César Torres
- * @1.0.0
+ * @version 1.0.0
  *
  */
 

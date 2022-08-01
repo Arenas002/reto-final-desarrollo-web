@@ -16,24 +16,50 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+/**
+ * Esta clase es la encarada de realizar las consultas a la base de datos para las tareas
+ *   @class TaskService
+ *   @author Cristian David Arenas - Julio César Torres
+ *   @version 1.0.0
+ */
+
 public class TaskService implements TaskServiceInterface {
 
+    /**
+     * inyectar la clase LogService
+     */
     @Autowired
     private LogService logService;
 
-    @Autowired
-    private TaskRepository
-            taskRepository;
+    /**
+     * Inyectar  TaskRepository
+     */
 
+    @Autowired
+    private TaskRepository taskRepository;
+
+    /**
+     * inyectar  ColumnRepository
+     */
     @Autowired
     private ColumnRepository columnRepository;
 
+    /**
+     * metodo para llamar todas las tareas
+     * @param idBoard se utilzia para identificar el tablero
+     * @return un valor null
+     */
     @Override
     public List<TaskDomain> findAllTasksById(Integer idBoard) {
         // TODO Auto-generated method stub
         return null;
     }
 
+    /**
+     * este metodo busca la tarea por el id
+     * @param id identifica la tarea
+     * @return si esta presente en la base de datos retorna la tarea si no retorna null
+     */
     @Transactional(readOnly = true)
     @Override
     public TaskDomain findById(Integer id) {
@@ -41,18 +67,34 @@ public class TaskService implements TaskServiceInterface {
         return task.isPresent() ? task.get() : null;
     }
 
+    /**
+     *  Este metodo crea nuevas tareas
+     * @param task se le asigna a una tarea
+     * @return guarda la inforacion de la nueva terea
+     */
     @Override
     public TaskDomain create(TaskDomain task) {
         return  taskRepository.save(task);
     }
 
-
+    /**
+     * este metodo actualiza la tarea en la base de datos
+     * @param id identifica la tarea
+     * @param task llama el modelo de la tarea
+     * @return funcion para guarda la informacion actualizada en la tarea
+     */
     @Override
+
     public TaskDomain update(Integer id, TaskDomain task) {
         task.setId(id);
         return taskRepository.save(task);
     }
 
+    /**
+     * Este metodo elimina la tarea
+     * @param id identifica cual es la tarea que se desea elminar
+     * @return un valor null
+     */
     @Override
     public TaskDomain delete(Integer id) {
        taskRepository.deleteById(id);

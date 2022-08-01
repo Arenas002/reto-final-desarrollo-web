@@ -23,6 +23,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "krl_column_for_board")
+/**
+ * esta clase es la encargada de mapear el modelo de las columnasForBoard de la base de datos
+ *   @class ColumnForBoardDomain
+ *   @author Cristian David Arenas - Julio César Torres
+ *   @version 1.0.0
+ */
+
 public class ColumnForBoardDomain implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,26 +40,40 @@ public class ColumnForBoardDomain implements Serializable {
             this.updatedAt = Instant.now();
     }
 
+    /**
+     * atributo id de la base de datos
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cfb_id", nullable = false)
     private Integer id;
 
-//boar- columfordboard
+    /**
+     *conexion uno a muchos de las entidades relacionales de las bases de datos, de la columna "columnsForBoard"
+     */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = BoardDomain.class, optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "brd_id_board", nullable = false)
     @JsonBackReference(value = "columnsForBoard")
     private BoardDomain board;
 
+    /**
+     *conexion muchos a uno de las entidades relacionales de las bases de datos, de la columna "column_For_Boards"
+     */
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.DETACH)
     @JsonIgnore
     @JoinColumn(name = "clm_id_column", nullable = false)
     @JsonManagedReference(value = "column_For_Boards")
     private ColumnDomain column;
 
+    /**
+     * atributo createdAt de la base de datos
+     */
     @Column(name = "cfb_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
+    /**
+     * atributo updatedAt de la base de datos
+     */
     @Column(name = "cfb_updated_at")
     private Instant updatedAt;
 

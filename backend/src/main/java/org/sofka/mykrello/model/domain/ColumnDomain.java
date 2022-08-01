@@ -16,6 +16,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "krl_column")
+/**
+ * esta clase es la encargada de mapear el modelo de las columnas de la base de datos
+ *   @class ColumnDomain
+ *   @author Cristian David Arenas - Julio César Torres
+ *   @version 1.0.0
+ */
+
 public class ColumnDomain implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,24 +33,41 @@ public class ColumnDomain implements Serializable {
             this.updatedAt = Instant.now();
     }
 
+    /**
+     * atributo id de la base de datos
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "clm_id", nullable = false)
     private Integer id;
 
+    /**
+     * atributo name de la base de datos
+     */
     @Column(name = "clm_name", nullable = false, length = 100)
     private String name;
 
+    /**
+     * atributo createdAt de la base de datos
+     */
     @Column(name = "clm_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
+    /**
+     * atributo updatedAt de la base de datos
+     */
     @Column(name = "clm_updated_at")
     private Instant updatedAt;
-
+    /**
+     * conexion uno a muchos de las entidades relacionales de las bases de datos, de la columna "column_For_boards"
+     */
     @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "column")
     @JsonBackReference(value = "column_For_Boards")
     private List<ColumnForBoardDomain> columnForBoards = new ArrayList<>();
 
+    /**
+     *conexion uno a muchos de las entidades relacionales de las bases de datos, de la columna "colunmDomain"
+     */
     @OneToMany(fetch = FetchType.EAGER, targetEntity = TaskDomain.class , mappedBy = "domain")
     @JsonManagedReference(value = "colunmDomain")
     private List<TaskDomain> taskDomainList= new ArrayList<>();

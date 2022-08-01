@@ -46,7 +46,7 @@ export class IndexView {
             img.src = "iconos/logo1.png"
             const p = document.createElement("a");
             p.innerHTML = element.name;
-            p.href = "index.task.html";
+            p.href = "index_task.html";
             p.className = "a_new"
             const img2 = document.createElement("img");
             img2.src = "iconos/eliminar.png"
