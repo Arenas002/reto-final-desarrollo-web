@@ -26,57 +26,15 @@ export class BoardService {
     async getBoard() {
 
         const resquest = await fetch(`${this.#Url}/boards`);
-<<<<<<< HEAD
         const { data } = await resquest.json();
         data.forEach(({ id, name, createdAt, updateAt, columnsForBoard }) => {
             this.#boards.push(new BoardModel(id, name, createdAt, updateAt, columnsForBoard));
             console.log(data);
-=======
-        const {data} = await resquest.json();
-        data.forEach(({id,name,createdAt,updateAt,columnsForBoard}) => {
-        this.#boards.push(new BoardModel(id,name,createdAt,updateAt,columnsForBoard));
 
-    });
-
-    return  this.#boards
-
-} 
->>>>>>> fef8f68193ed00949d15e207bb70b4c3604c56d5
-
-async createBoard(data){
-    const responseData = await fetch(`${this.#Url}/board`,{
-        method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)})
-      const response = await responseData.json();
-console.log(response);
-      return response
-    } 
-
-
-
-delecteBoard(){
-
-    fetch(`${this.#Url}/board`, {
-        method: 'DELETE',
-    })
-    .then(res => res.json())
-    .then(res=> {
-        console.log(res);
-    });
-}
 
         });
 
-<<<<<<< HEAD
         return this.#boards
-=======
-   
-    
->>>>>>> fef8f68193ed00949d15e207bb70b4c3604c56d5
 
     }
     /**
