@@ -1,25 +1,36 @@
 
+<<<<<<< HEAD
 /**
  * clase para mostrar la vista de las tareas
  * @class TaskView
  * @authores
  * @version 1.0.0
  */
+=======
+>>>>>>> fef8f68193ed00949d15e207bb70b4c3604c56d5
 export TaskView(){
 
 
     #body;
+<<<<<<< HEAD
 /**
  * contructor de la clase TaskView
  */
+=======
+
+>>>>>>> fef8f68193ed00949d15e207bb70b4c3604c56d5
     constructor(){
         document.title = "krello";
         this.#body = document.querySelector('body');
     
     }
+<<<<<<< HEAD
 /**
  * creacion del HTML a travez del DOM para creacion de las tareas
  */
+=======
+
+>>>>>>> fef8f68193ed00949d15e207bb70b4c3604c56d5
     #createSection2(){
         const header = document.createElement("header");
         const div = document.createElement("div");
@@ -70,5 +81,30 @@ export TaskView(){
 
 
 
+<<<<<<< HEAD
 
+=======
+//     <header>
+//     <div>
+//     <p class="trellor"><b class="ktrellor">k</b>rellor</p>
+//     </div>
+//     <div class="volver"><a href="index.html">Volver al menu </a></div>
+// </header>
+
+// <section class="classbar" >
+//     <div>
+//         <h3>Lista de tareas por hacer</h3>
+//         <div></div>
+//     </div>
+//     <div>
+//         <h3>En proceso</h3>
+//         <div></div>
+        
+//     </div>
+//     <div>
+//         <h3>Hecho</h3>
+//         <div></div>
+//     </div>
+// </section>
+>>>>>>> fef8f68193ed00949d15e207bb70b4c3604c56d5
 
