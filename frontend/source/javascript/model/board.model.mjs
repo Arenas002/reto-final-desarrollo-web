@@ -1,3 +1,8 @@
+/** clase del modelo del tablero
+ * @class BoardModel
+ * @author
+ * @version 1.0.0
+ */
 export class BoardModel{
 
     #id
@@ -5,7 +10,14 @@ export class BoardModel{
     #createdAt
     #updatedAt
     #columnsForBoard
-
+/**
+ * Constructor de la clase 
+ * @param {number} id
+ * @param {String} name 
+ * @param {string} createdAt 
+ * @param {string} updateAt 
+ * @param {string} columnsForBoard 
+ */
     constructor(id,name,createdAt,updateAt,columnsForBoard){
         this.#id = id;
         this.#name = name;
