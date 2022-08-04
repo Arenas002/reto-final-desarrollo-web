@@ -1,6 +1,6 @@
 /** clase del modelo del tablero
  * @class BoardModel
- * @author
+ * @author Cristian David Arenas - Julio César Torres
  * @version 1.0.0
  */
 export class BoardModel{

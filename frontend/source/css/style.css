@@ -47,7 +47,7 @@ section{
    color: #1d1d1d; 
    margin: 30px 15%;
    /* margin-bottom: 50px; */
-   background-color: #d7d7d7;
+   background-color: #f5a051;
    /* border: solid 1px #6AC3EC */
    border-radius: 10px;
     /* width: 200px;  */
@@ -59,9 +59,11 @@ section{
   width: 50px;
   height: 40px;
 }
+
  .basura{
    width: 25px;
    height: 25px;
+   margin-left: 15px;
  }
  .medio{
    display: block;
@@ -69,6 +71,11 @@ section{
    text-align: center;
  }
 
+ .editar{
+  width: 25px;
+   height: 25px;
+   
+ }
  .nombres:hover {
    background-color: #6AC3EC;
  }
@@ -82,7 +89,7 @@ section{
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 :root {
    --lightgray: #efefef;
-   --blue: steelblue;
+   --blue: #6AC3EC;
    --white: #fff;
    --black: rgba(0, 0, 0, 0.8);
    --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
@@ -106,7 +113,7 @@ section{
    background: #6AC3EC;
    color: var(--white);
    padding: 1rem 2rem;
-   margin-left: 42%;
+   margin-left: 43.5%;
    margin-bottom: 100px;
    border-radius: 5px;
    font-size: 30px;

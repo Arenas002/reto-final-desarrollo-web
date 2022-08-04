@@ -7,11 +7,11 @@ import { BoardModel } from "../model/board.model.mjs"
 import { BoardService } from "../model/services/board.service.mjs"
 
 /**
- * Esta clase es la encarada de controlar los tableros interactando 
+ * Esta clase es la encarada de controlar los tableros interactuando 
  * con la clase BoardServices
  * @class IndexController
  * @author Cristian David Arenas - Julio César Torres
- * @1.0.0
+ * @version 1.0.0
  *
  */
 
@@ -52,10 +52,24 @@ export class IndexController {
      * Funcion parra borrar el tablero
      */
 
-    async deleteBoard() {
+    async deleteBoard(idBoard) {
         const borrarData = new BoardService(ktrelloURL);
-        return await borrarData.delecteBoard();
+        return await borrarData.delecteBoard(idBoard);
 
+    }
+
+
+    async editBoard(id,name){
+        const editaData = new BoardService(ktrelloURL);
+        const response = await editaData.getBoardId(id);
+        const today = new Date();
+        response.name = name;
+        response.updatedAt = today;
+        response.columnsForBoard =[];
+        const payload = response;
+        console.log("board", payload);
+        const editResponse = await editaData.editBoard(payload,id);
+        if(editResponse) window.location.reload();
     }
 
     /**
@@ -72,7 +86,7 @@ export class IndexController {
  * Se ejecuta el codigo 
  */
 
-const index = new IndexController();
+ export const index = new IndexController();
 index.init();
 
 

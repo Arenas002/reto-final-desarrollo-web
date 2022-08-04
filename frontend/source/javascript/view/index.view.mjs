@@ -1,3 +1,5 @@
+import { index } from "../controller/index.controller.mjs";
+
 /**
  * @class IndexView
  * @author
@@ -26,6 +28,7 @@ export class IndexView {
         this.#createSection2();
         this.#modal(createBoard);
         this.#deleteModal();
+        this.#editModal()
     }
 
 
@@ -36,6 +39,7 @@ export class IndexView {
     #llamarNombre(data) {
 
         data.forEach((element) => {
+            console.log(element);
 
             const section = document.createElement("section");
             section.className = "medio";
@@ -44,21 +48,43 @@ export class IndexView {
             const img = document.createElement("img");
             img.className = "logo";
             img.src = "iconos/logo1.png"
-            const p = document.createElement("a");
-            p.innerHTML = element.name;
-            p.href = "index.task.html";
-            p.className = "a_new"
+            const a = document.createElement("a");
+            a.innerHTML = element.name
+            a.href = "index_task.html?id="+ element.id;
+            a.className = "a_new"
+
+            const divIconos = document.createElement("div");
+            divIconos.className = "C-iconos";
             const img2 = document.createElement("img");
             img2.src = "iconos/eliminar.png"
             img2.alt = "imagen";
             img2.type = "submit"
             img2.className = "basura";
-            img2.addEventListener("click", function () {
-                document.getElementById("modal2").classList.add("is-visible");
+            img2.setAttribute("data-idBoard", element.id)
+            img2.addEventListener("click", () =>{
+                const modal = document.getElementById("modal2")
+                modal.classList.add("is-visible");
+                const button = document.getElementById("confirmar");
+                button.setAttribute("data-idBoard",element.id);
+          
             });
+            const iconoEditar = document.createElement("img");
+            iconoEditar.className = "editar"
+            iconoEditar.alt = "imagen editar";
+            iconoEditar.src = "iconos/editar.png"
+            iconoEditar.addEventListener("click", () =>{
 
+            const editModal = document.getElementById("modal3")
+            editModal.classList.add("is-visible");
+            const button = document.getElementById("confirmar-edit");
+            const input = document.getElementById("edit-input")
+            input.setAttribute("value",element.name)
+            button.setAttribute("data-board",element.id);
+
+        });
             section.append(div)
-            div.append(img, p, img2);
+            divIconos.append(iconoEditar,img2)
+            div.append(img, a,divIconos);
             this.#body.append(section);
 
         });
@@ -181,9 +207,9 @@ export class IndexView {
 
 
     }
-/**
- * metodo para la creacion del model para la eliminacion
- */
+    /**
+     * metodo para la creacion del model para la eliminacion
+     */
 
     #deleteModal() {
 
@@ -203,17 +229,69 @@ export class IndexView {
         const buttonSend = document.createElement("button");
         buttonSend.type = "submit"
         buttonSend.innerHTML = "Eliminar"
+        buttonSend.id = "confirmar";
+        buttonSend.addEventListener("click", (event)=>{
+            console.log(event.target.dataset.idboar);
+             index.deleteBoard(event.target.dataset.idboard);
+            location.reload();
+        })
         const buttonCancelar = document.createElement("button");
         buttonCancelar.innerHTML = "Cancelar"
         buttonCancelar.addEventListener("click", function () {
             document.getElementById("modal2").classList.remove("is-visible");
         })
 
-
-
-
         form.append(buttonSend, buttonCancelar)
         section.append(form);
+        div2.append(header, section, footer, buttonSend, buttonCancelar);
+        div.append(div2);
+        this.#body.append(div);
+
+    }
+
+
+
+    #editModal() {
+
+        const div = document.createElement("div");
+        div.className = "modal";
+        div.id = "modal3";
+        const div2 = document.createElement("div");
+        div2.className = "modal-dialog";
+        const header = document.createElement("header");
+        header.className = "modal-header";
+        const section = document.createElement("section");
+        section.className = "modal-content";
+        const form = document.createElement("form");
+        form.id = "createBoard";
+        
+        const input = document.createElement("input")
+        input.type = "text";
+        input.placeholder = "Nombre del tablero";
+        input.id = "edit-input";
+        input.required = true;
+        
+        const label = document.createElement("label");
+        label.innerHTML = "Editar tablero"
+
+        const footer = document.createElement("footer");
+        footer.className = "modal-footer";
+        const buttonSend = document.createElement("button");
+        buttonSend.type = "submit"
+        buttonSend.innerHTML = "Editar"
+        buttonSend.id = "confirmar-edit";
+        buttonSend.addEventListener("click", (event)=>{
+             index.editBoard(event.target.dataset.board, input.value );
+        })
+        const buttonCancelar = document.createElement("button");
+        buttonCancelar.innerHTML = "Cancelar"
+        buttonCancelar.addEventListener("click", function () {
+            document.getElementById("modal3").classList.remove("is-visible");
+        })
+
+
+        form.append(input,buttonSend, buttonCancelar)
+        section.append(label,form);
         div2.append(header, section, footer, buttonSend, buttonCancelar);
         div.append(div2);
         this.#body.append(div);

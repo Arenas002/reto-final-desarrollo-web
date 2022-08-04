@@ -29,7 +29,7 @@ export class BoardService {
         const { data } = await resquest.json();
         data.forEach(({ id, name, createdAt, updateAt, columnsForBoard }) => {
             this.#boards.push(new BoardModel(id, name, createdAt, updateAt, columnsForBoard));
-            console.log(data);
+            console.log("esta es la dataa",columnsForBoard );
 
 
         });
@@ -37,6 +37,13 @@ export class BoardService {
         return this.#boards
 
     }
+
+async getBoardId(id){
+    const resquest = await fetch(`${this.#Url}/board/${id}`)
+    const {data} = await resquest.json();
+    return data;
+}
+
     /**
      * Metodo creador de tableros
      * @param {object} data  objeto para la creacion del tablero
@@ -61,7 +68,42 @@ export class BoardService {
  * 
  * @returns endpoint para la eliminacion de tableros
  */
-    delecteBoard() {
-        return axios.delete(`${this.#Url}/board/borrar/{id}`)
+    async delecteBoard(idBoard) {
+        // const responseData = await fetch(`${this.#Url}/board/borrar/${idBoard}`, {
+        //     method: 'DELETE',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+            
+        // })
+        // debugger
+        // const response = await responseData.json();
+        const data =  await axios.delete(`${this.#Url}/board/borrar/${idBoard}`)
+        console.log(data);
+        return response
     }
+
+    async editBoard(board, id){
+        const responseData = await fetch(`${this.#Url}/board/put/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(board)
+                
+            })
+            const response = await responseData.json();
+            return response;
+    }
+
+    // async editBoard(board, id) {
+    //     const { data } = await axios.put(`${this.#Url}/board/put/${id}`,board);    
+    //     return data.data;
+    //   }
+
+    
+
 }
