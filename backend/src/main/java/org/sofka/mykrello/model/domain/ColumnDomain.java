@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @Entity
@@ -27,6 +29,9 @@ public class ColumnDomain implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Metodo que se utiliza antes de la actualziacion de la columna
+     */
     @PreUpdate
     public void preUpdate() {
         if (this.updatedAt == null)
@@ -68,7 +73,7 @@ public class ColumnDomain implements Serializable {
     /**
      *conexion uno a muchos de las entidades relacionales de las bases de datos, de la columna "colunmDomain"
      */
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = TaskDomain.class ,  mappedBy = "domain")
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = TaskDomain.class ,  mappedBy = "domain", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "colunmDomain")
     private List<TaskDomain> taskDomainList= new ArrayList<>();
 }

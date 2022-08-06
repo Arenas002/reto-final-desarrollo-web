@@ -230,6 +230,9 @@ export class IndexView {
         buttonSend.type = "submit"
         buttonSend.innerHTML = "Eliminar"
         buttonSend.id = "confirmar";
+        /**
+         * Busca la ubicacion del tablero en la base de dato para borrarla
+         */
         buttonSend.addEventListener("click", (event)=>{
             console.log(event.target.dataset.idboar);
              index.deleteBoard(event.target.dataset.idboard);
@@ -249,7 +252,9 @@ export class IndexView {
 
     }
 
-
+    /**
+     * metodo para la creacion del model para el edit
+     */
 
     #editModal() {
 
@@ -297,4 +302,7 @@ export class IndexView {
         this.#body.append(div);
 
     }
+
+
+
 }

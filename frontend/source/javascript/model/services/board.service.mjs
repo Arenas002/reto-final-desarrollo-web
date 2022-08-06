@@ -29,7 +29,6 @@ export class BoardService {
         const { data } = await resquest.json();
         data.forEach(({ id, name, createdAt, updateAt, columnsForBoard }) => {
             this.#boards.push(new BoardModel(id, name, createdAt, updateAt, columnsForBoard));
-            console.log("esta es la dataa",columnsForBoard );
 
 
         });

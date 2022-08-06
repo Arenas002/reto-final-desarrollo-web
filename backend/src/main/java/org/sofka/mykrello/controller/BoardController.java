@@ -58,7 +58,6 @@ inyector de la clase MyResponseUtility
     public ResponseEntity<MyResponseUtility> getBoardById(@PathVariable(value = "id") Integer id) {
         response.data = boardService.findById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
 
     /**

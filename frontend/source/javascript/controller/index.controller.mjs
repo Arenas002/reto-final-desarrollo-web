@@ -58,14 +58,16 @@ export class IndexController {
 
     }
 
-
+/**
+ * Funcion de editar tablero
+ */
     async editBoard(id,name){
         const editaData = new BoardService(ktrelloURL);
         const response = await editaData.getBoardId(id);
         const today = new Date();
         response.name = name;
         response.updatedAt = today;
-        response.columnsForBoard =[];
+        response.columns=[];
         const payload = response;
         console.log("board", payload);
         const editResponse = await editaData.editBoard(payload,id);
