@@ -1,8 +1,9 @@
 import { index } from "../controller/index.controller.mjs";
 
 /**
+ * Esta clase es la encargada de crear toda la parte visual que el usuario va a ver  por medio del DOM 
  * @class IndexView
- * @author
+ * @author Cristian David Arenas - Julio César Torres
  * @version 1.0.0
  */
 export class IndexView {
@@ -116,7 +117,9 @@ export class IndexView {
 
     }
 
-
+/**
+ * metodo para crear section en el html
+ */
 
     #createSection2() {
         const section = document.createElement("section");
@@ -230,6 +233,9 @@ export class IndexView {
         buttonSend.type = "submit"
         buttonSend.innerHTML = "Eliminar"
         buttonSend.id = "confirmar";
+        /**
+         * Busca la ubicacion del tablero en la base de dato para borrarla
+         */
         buttonSend.addEventListener("click", (event)=>{
             console.log(event.target.dataset.idboar);
              index.deleteBoard(event.target.dataset.idboard);
@@ -249,7 +255,9 @@ export class IndexView {
 
     }
 
-
+    /**
+     * metodo para la creacion del model para el edit
+     */
 
     #editModal() {
 
@@ -297,4 +305,7 @@ export class IndexView {
         this.#body.append(div);
 
     }
+
+
+
 }

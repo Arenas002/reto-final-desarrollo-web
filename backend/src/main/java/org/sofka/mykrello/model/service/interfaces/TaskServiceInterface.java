@@ -40,4 +40,7 @@ public interface TaskServiceInterface {
      * @return tablero borrado
      */
     public TaskDomain delete(Integer id);
+
+
+
 }

@@ -12,7 +12,7 @@ export class BoardService {
 
 /**
  * metodo constructor de la clase 
- * @param {*} url url para concectarse a la Base de datos
+ * @param {string} url url para concectarse a la Base de datos
  */
     constructor(url) {
         this.#Url = url
@@ -20,7 +20,7 @@ export class BoardService {
     }
 
 /**
- * Optencion de boards desde la api
+ * Obtencion de boards desde la api
  * @returns - promesa con los tableros
  */
     async getBoard() {
@@ -29,7 +29,6 @@ export class BoardService {
         const { data } = await resquest.json();
         data.forEach(({ id, name, createdAt, updateAt, columnsForBoard }) => {
             this.#boards.push(new BoardModel(id, name, createdAt, updateAt, columnsForBoard));
-            console.log("esta es la dataa",columnsForBoard );
 
 
         });
@@ -65,7 +64,8 @@ async getBoardId(id){
     }
 
 /**
- * 
+ * funcion para eliminar los tableros
+ * @param {number} idBoard  id del tablero a eliminar 
  * @returns endpoint para la eliminacion de tableros
  */
     async delecteBoard(idBoard) {
@@ -83,7 +83,12 @@ async getBoardId(id){
         console.log(data);
         return response
     }
-
+/**
+ * funcion para editar el tablero
+ * @param {object} board nueva informacion del tablero
+ * @param {number} id id del tablero a editar 
+ * @returns endpoint para la edicion de tableros
+ */
     async editBoard(board, id){
         const responseData = await fetch(`${this.#Url}/board/put/${id}`, {
                 method: 'PUT',

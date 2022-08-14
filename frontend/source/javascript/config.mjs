@@ -1,5 +1,8 @@
 /**
  * Nos trae la direccion de la api
+ * @class Config
+ * @author Cristian David Arenas - Julio César Torres
+ * @version 1.0.0
  */
 
 export class Config{

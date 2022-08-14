@@ -1,3 +1,9 @@
+/** clase del modelo del tablero
+ * @class BoardModel
+ * @author Cristian David Arenas - Julio César Torres
+ * @version 1.0.0
+ */
+
 export class TaskModel{
 
     #id;
@@ -10,7 +16,18 @@ export class TaskModel{
     #board;
     #column;
 
-
+/**
+ * constructor de la clase
+ * @param {number} id  ide de la tarea
+ * @param {String} name  nombre de la tarea
+ * @param {String} description  descripcion de la tarea
+ * @param {Instant} delivery fecha de vencimiento de la tarea
+ * @param {Instant} createdAt fecha de creacion de la tarea
+ * @param {Instant} updatedAt fecha de actualizacion de la tarea
+ * @param {number} column id de la columna 
+ * @param {number} board  id del tablero 
+ * @param {Array} log 
+ */
     constructor(id,name,description,delivery,createdAt,updatedAt,column,board,log = []){
     this.#id = id;
     this.#name = name;

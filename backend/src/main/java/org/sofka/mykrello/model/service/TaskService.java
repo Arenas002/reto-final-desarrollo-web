@@ -44,16 +44,7 @@ public class TaskService implements TaskServiceInterface {
     @Autowired
     private ColumnRepository columnRepository;
 
-    /**
-     * metodo para llamar todas las tareas
-     * @param idBoard se utilzia para identificar el tablero
-     * @return un valor null
-     */
-    @Override
-    public List<TaskDomain> findAllTasksById(Integer idBoard) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+
 
     /**
      * este metodo busca la tarea por el id
@@ -65,6 +56,11 @@ public class TaskService implements TaskServiceInterface {
     public TaskDomain findById(Integer id) {
         var task = taskRepository.findById(id);
         return task.isPresent() ? task.get() : null;
+    }
+
+
+    public List<TaskDomain> findAllTasksById(Integer idBoard) {
+        return taskRepository.findAllByBoard(idBoard);
     }
 
     /**
@@ -99,5 +95,15 @@ public class TaskService implements TaskServiceInterface {
     public TaskDomain delete(Integer id) {
        taskRepository.deleteById(id);
        return null;
+    }
+
+    /**
+     *  Este TaskDomain llama las tareas y sus columnas
+     * @param idColumn
+     * @param idBoard
+     */
+
+    public List<TaskDomain> findAllByColumnAndAndBoard(Integer idColumn, Integer idBoard) {
+        return taskRepository.findAllByColumnAndAndBoard(idColumn, idBoard);
     }
 }

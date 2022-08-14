@@ -48,9 +48,11 @@ export class IndexController {
         }
     }
 
-    /**
-     * Funcion parra borrar el tablero
-     */
+   /**
+    * funcion para eliminar el tablero
+    * @param {number} idBoard  id del tablero a eliminar 
+    * @returns retorna la consulta a la base de datos 
+    */
 
     async deleteBoard(idBoard) {
         const borrarData = new BoardService(ktrelloURL);
@@ -58,14 +60,18 @@ export class IndexController {
 
     }
 
-
+/**
+ * funcion para editar el tablero 
+ * @param {number} id id para buscar el tablero a editar 
+ * @param {String} name valor del input con el nuevo nombre 
+ */
     async editBoard(id,name){
         const editaData = new BoardService(ktrelloURL);
         const response = await editaData.getBoardId(id);
         const today = new Date();
         response.name = name;
         response.updatedAt = today;
-        response.columnsForBoard =[];
+        response.columns=[];
         const payload = response;
         console.log("board", payload);
         const editResponse = await editaData.editBoard(payload,id);

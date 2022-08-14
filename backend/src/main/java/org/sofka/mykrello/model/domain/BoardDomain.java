@@ -31,6 +31,10 @@ public class BoardDomain implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Se utiliza para realziar la marca de un tiempo cuando se actualiza el tablero
+     * si no se establece se aplica el UpdateAt
+     */
     @PreUpdate
     public void preUpdate() {
         if (this.updatedAt == null)
@@ -64,7 +68,7 @@ public class BoardDomain implements Serializable {
     /**
      * conexion uno a muchos de las entidaddes de las bases de datos, de la columna "columnsForBoard"
      */
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "board")
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "board", orphanRemoval = true)
     @JsonManagedReference(value = "columnsForBoard")
     private List<ColumnForBoardDomain> columnsForBoard = new ArrayList<>();
 

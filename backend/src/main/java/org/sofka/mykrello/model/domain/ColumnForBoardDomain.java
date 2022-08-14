@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @Entity
@@ -34,6 +36,9 @@ public class ColumnForBoardDomain implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Se llama antes de la actualizacion del columnforBoard
+     */
     @PreUpdate
     public void preUpdate() {
         if (this.updatedAt == null)
@@ -51,7 +56,7 @@ public class ColumnForBoardDomain implements Serializable {
     /**
      *conexion uno a muchos de las entidades relacionales de las bases de datos, de la columna "columnsForBoard"
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = BoardDomain.class, optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = BoardDomain.class, optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "brd_id_board", nullable = false)
     @JsonBackReference(value = "columnsForBoard")
     private BoardDomain board;
@@ -60,6 +65,8 @@ public class ColumnForBoardDomain implements Serializable {
      *conexion muchos a uno de las entidades relacionales de las bases de datos, de la columna "column_For_Boards"
      */
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.DETACH)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     @JoinColumn(name = "clm_id_column", nullable = false)
     @JsonManagedReference(value = "column_For_Boards")
     private ColumnDomain column;

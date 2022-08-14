@@ -58,7 +58,7 @@ public class TaskController {
      * @param task llama al modelo de la tarea
      * @return retorna la peticion y el estado
      */
-    @PostMapping(path = "/api/v1/task")
+    @PostMapping(path = "/api/v1/task/create")
     public ResponseEntity<MyResponseUtility> create(@RequestBody TaskDomain task){
         response.data= taskService.create(task);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
